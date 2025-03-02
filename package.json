@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "vercel dev",
-    "deploy": "vercel --prod",
-    "build": "node index.js"
+    "deploy": "vercel --prod"
   },
   "dependencies": {
     "http-proxy": "^1.18.1",
