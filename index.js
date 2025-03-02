@@ -5,7 +5,6 @@ const app = new Koa();
 // 代理配置
 app.use(proxy({
     host: 'http://cmyam.net:65533', // 后端服务的地址
-    match: /^\/api\//, // 匹配以 /api/ 开头的请求路径
 }));
 
 // 其他路由处理

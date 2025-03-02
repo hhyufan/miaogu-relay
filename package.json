@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.16.0",
+    "koa-proxy": "^1.0.0-alpha.3"
+  }
 }
