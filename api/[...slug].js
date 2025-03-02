@@ -8,7 +8,7 @@ const proxy = httpProxy.createProxyServer({
 
 // CORS 处理函数
 const setCORSHeaders = (res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); // 允许所有源，或替换为特定源
+    res.setHeader('Access-Control-Allow-Origin', "https://www.miaogu.top", "https://app.miaogu.top"); // 允许所有源，或替换为特定源
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // 允许的 HTTP 方法
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // 允许的自定义头部
 };
