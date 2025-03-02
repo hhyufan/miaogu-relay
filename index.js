@@ -1,35 +1,24 @@
-
-const { get } = require('@vercel/edge-config');
-
-const http = require('http');
 const httpProxy = require('http-proxy');
 
-// 创建一个代理服务器
-const proxy = httpProxy.createProxyServer({});
+// 配置参数
+const TARGET_URL = 'http://cmyam.net:65533'; // 目标服务地址
 
-function fetchData(key) {
-    // 使用 get 函数
-    get(key).then(value => {
-        console.log(value);
-    }).catch(error => {
-        console.error('Error fetching data:', error);
-    });
-}
-
-// 创建一个 HTTP 服务器
-const server = http.createServer((req, res) => {
-    // 目标服务器
-    const targetUrl = fetchData('API_URL') || 'http://cmyam.net:65533'
-    // 将请求转发到目标服务器
-    proxy.web(req, res, { target: targetUrl }, (error) => {
-        console.error('Proxy error:', error);
-        res.writeHead(502, { 'Content-Type': 'text/plain' });
-        res.end('Bad Gateway');
-    });
+const proxy = httpProxy.createProxyServer({
+    target: TARGET_URL,
+    changeOrigin: true, // 修改请求头中的 Origin 为目标地址
 });
 
-// 启动服务器
-const PORT = 3008; // 代理服务器的端口
-server.listen(PORT, () => {
-    console.log(`Proxy server is running on http://localhost:${PORT}`);
+module.exports = (req, res) => {
+    // 仅处理目标域名的请求
+    proxy.web(req, res, (err) => {
+        if (err) {
+            console.error('代理错误:', err.message);
+            res.status(500).send('代理错误');
+        }
+    });
+};
+
+// 错误处理
+proxy.on('error', (err) => {
+    console.error('代理错误:', err.message);
 });

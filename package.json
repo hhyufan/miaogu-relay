@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vercel/edge-config": "^1.4.0",
+    "http-proxy": "^1.18.1",
     "koa": "^2.16.0"
   }
 }
